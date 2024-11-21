@@ -1,21 +1,19 @@
 import React from "react";
 
-const Item = ({ content, id, deleteTodo, changeStyle }) => {
-  // const chenge = () => {
-  //   changeStyle();
-  // };
+const Item = ({ todos, deleteTodo, changeIsDone }) => {
+  const handleChange = () => {
+    changeIsDone(todos.id);
+  };
 
   const handleDelete = () => {
-    deleteTodo(id);
+    deleteTodo(todos.id);
   };
 
   return (
     <li>
-      <input type="checkbox" onChange={changeStyle} />
-      <span
-      // style={{ textDecoration: isDone ? "line-through" : "none" }}
-      >
-        {content}
+      <input type="checkbox" onChange={handleChange} />
+      <span style={{ textDecoration: todos.isDone ? "line-through" : "none" }}>
+        {todos.content}
       </span>
       <button onClick={handleDelete}>削除</button>
     </li>

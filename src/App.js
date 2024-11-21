@@ -6,14 +6,22 @@ import List from "./List";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
-  const [isDone, setIsDone] = useState(false);
+  // const [isDone, setIsDone] = useState(false);
 
-  const changeStyle = () => {
-    setIsDone(!isDone);
+  const changeIsDone = (id) => {
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, isDone: !todo.isDone };
+        } else {
+          return { ...todo };
+        }
+      })
+    );
   };
 
   const addTodo = (value) => {
-    setTodos([...todos, { content: value, id: nanoid(), state: false }]);
+    setTodos([...todos, { content: value, id: nanoid(), isDone: false }]);
   };
 
   const deleteTodo = (id) => {
@@ -24,7 +32,7 @@ const App = () => {
     <>
       <h1>Todo App</h1>
       <Form addTodo={addTodo} />
-      <List todos={todos} deleteTodo={deleteTodo} changeStyle={changeStyle} />
+      <List todos={todos} deleteTodo={deleteTodo} changeIsDone={changeIsDone} />
     </>
   );
 };

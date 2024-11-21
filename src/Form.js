@@ -1,8 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 const Form = ({ addTodo }) => {
   const [value, setValue] = useState("");
-  const inputRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,16 +10,15 @@ const Form = ({ addTodo }) => {
       return;
     }
 
+    setValue("");
     addTodo(value);
-
-    inputRef.current.value = "";
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        ref={inputRef}
         type="text"
+        value={value}
         onChange={(e) => {
           setValue(e.target.value);
         }}
